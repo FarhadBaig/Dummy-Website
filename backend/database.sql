@@ -26,14 +26,11 @@ CREATE TABLE IF NOT EXISTS products (
 );
 
 -- Services table
-CREATE TABLE IF NOT EXISTS services (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(150) NOT NULL,
-  description TEXT NOT NULL,
-  price DECIMAL(10, 2) NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  INDEX idx_name (name)
+CREATE TABLE services (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    description TEXT,
+    price DECIMAL(10,2)
 );
 
 -- Sample data for products
@@ -46,14 +43,11 @@ INSERT INTO products (name, description, price) VALUES
 ('Product Six', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. now you let me see u again in the form of adventure', 799.99);
 
 -- Sample data for services
-INSERT INTO services (name, description, price) VALUES
-('Service One', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. now you let me see u again in the form of adventure', 199.99),
-('Service Two', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. now you let me see u again in the form of adventure', 249.99),
-('Service Three', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. now you let me see u again in the form of adventure', 299.99),
-('Service Four', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. now you let me see u again in the form of adventure', 349.99),
-('Service Five', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. now you let me see u again in the form of adventure', 399.99),
-('Service Six', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. now you let me see u again in the form of adventure', 449.99);
-
+INSERT INTO services (name, description, price)
+VALUES
+('Web Development', 'Professional website development services', 499.99),
+('Mobile App Development', 'Android and iOS applications', 799.99),
+('SEO Optimization', 'Improve search engine ranking', 299.99);
 -- Terminal 1 (Keep Open):
 -- $ npm start
 -- → Server running on http://localhost:5000

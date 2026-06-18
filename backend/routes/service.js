@@ -1,3 +1,15 @@
+const serviceHTML = `
+<div class="service-card">
+    <div class="service-content">
+        <h3>${service.name}</h3>
+        <p>${service.description}</p>
+        <div class="service-footer">
+            <span class="price">$${parseFloat(service.price).toFixed(2)}</span>
+            <button class="btn">Learn More</button>
+        </div>
+    </div>
+</div>
+`;
 const express = require('express');
 const router = express.Router();
 const serviceController = require('../controllers/serviceController');
