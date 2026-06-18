@@ -9,7 +9,7 @@ body{
   height: auto;
   margin: 10px auto;
   background-color: white;
-  border: 1px gainsboro;
+  border: 1px solid gainsboro;
   box-shadow: 0px 0px 25px rgba(0,0,0,.5);
 }
 .main-header{
@@ -77,7 +77,7 @@ ul.lSPager.lSpg {
   display: flex;
   justify-content: space-between;
   background-color: cornflowerblue;
-  border-bottom: 1px solid gainsboro
+  border-bottom: 1px solid gainsboro;
 }
 .content-holder .content{
   padding: 25px;
