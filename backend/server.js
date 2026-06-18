@@ -1,38 +1,60 @@
 const express = require('express');
+const mysql = require('mysql2');
 const cors = require('cors');
-const bodyParser = require('body-parser');
-require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 
-// Routes
-const contactRoutes = require('./routes/contact');
-const productRoutes = require('./routes/product');
-const serviceRoutes = require('./routes/service');
-
-app.use('/api/contact', contactRoutes);
-app.use('/api/product', productRoutes);
-app.use('/api/service', serviceRoutes);
-
-// Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'Server is running', time: new Date() });
+// MySQL Connection
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'Farhad@1010',
+    database: 'dummy_website'
 });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: 'Internal Server Error', message: err.message });
+db.connect((err) => {
+    if (err) {
+        console.error('Database connection failed:', err);
+        return;
+    }
+    console.log('Database connected successfully');
 });
 
-// Start server
+// Product API
+app.get('/api/product', (req, res) => {
+    db.query('SELECT * FROM product', (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({
+                success: false,
+                message: 'Database query failed'
+            });
+        }
+
+        res.json({
+            success: true,
+            data: results
+        });
+    });
+});
+
+// Contact API
+app.post('/api/contact', (req, res) => {
+    console.log('Contact Form Data:', req.body);
+
+    res.json({
+        success: true,
+        message: 'Contact form submitted successfully'
+    });
+});
+
+// Start Server
+const PORT = 5000;
+
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-  console.log(`Health check: http://localhost:${PORT}/api/health`);
+    console.log(`Server running on port ${PORT}`);
 });
